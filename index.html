@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Robo Friend</title>
+  <style>
+    body {
+      background-image: url('Image.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .robots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .android {
+      animation: float 5s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .main-head, .torso, .left-arm, .right-arm, .left-leg-sub, .right-leg-sub {
+      transition: transform 0.3s ease;
+    }
+
+    .main-head:hover, .torso:hover {
+      transform: translateY(-5px);
+    }
+
+    .left-arm:hover, .right-arm:hover {
+      transform: rotate(10deg);
+    }
+
+    .eyes:hover {
+      transform: scale(1.1);
+    }
+
+    .left-eye, .right-eye {
+      transition: transform 0.3s ease;
+    }
+
+    .left-eye:hover, .right-eye:hover {
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .android {
+        transform: scale(0.8);
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      .android {
+        transform: scale(0.6);
+      }
+    }
+    .fall {
+    animation: fallDown 1s forwards;  /* 1-second fall animation */
+  }
+  
+  @keyframes fallDown {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(90deg);  /* Robot falls to the right */
+    }
+  }
+  </style>
+</head>
+<body>
+  <h1 class="dance">Robo Friend</h1>  
+  <div class="robots"  id="robot">
+    <div class="android">
+      <!-- main-head -->
+      <div class="main-head">
+        <div class="main-antenna">
+          <div class="parent-antenna"></div>
+          <div class="child-antenna"></div>         
+        </div>
+        <!-- head -->
+        <div class="head">
+          <div class="eyes">
+            <div class="left-eye">
+              <div class="left-sub-eye"></div>
+            </div>
+            <div class="right-eye">
+              <div class="right-sub-eye"></div>
+            </div>
+          </div>
+        </div> 
+        <!-- End of head -->
+      </div>
+      <!-- End of main-head -->
+
+      <!-- upper-body -->
+      <div class="upper-body">
+        <div class="main-left-arm">
+          <div class="left-arm"></div>
+          <div class="left-hand">
+              <div class="left-finger-one"></div>
+              <div class="left-finger-two"></div>
+              <div class="left-finger-three"></div>
+          </div>
+        </div>
+        
+        <!-- torso -->
+        <div class="torso">
+          <div class="chest">
+            <div class="sub-chest"></div>
+          </div>
+        </div>
+        <!-- End of Torso -->
+
+        <div class="main-right-arm">
+            <div class="right-arm"></div>
+            <div class="right-hand">
+              <div class="right-finger-one"></div>
+              <div class="right-finger-two"></div>
+              <div class="right-finger-three"></div>
+            </div>
+        </div>        
+      </div>
+      <!-- End of upper-body -->
+
+      <!-- lower-body -->
+      <div class="lower-body">
+        <div class="left-leg-main">
+            <div class="left-leg-sub"></div>
+            <div class="left-foot"></div>
+        </div>
+        <div class="right-leg-main">
+            <div class="right-leg-sub"></div>
+            <div class="right-foot"></div>
+        </div>       
+      </div>
+      <!-- End of lower-body -->
+    </div>
+  </div>
+<!-- Add different audio clips -->
+<audio id="headline-sound" src="Robo_Friend.mp3"></audio>
+<audio id="head-sound" src="head.mp3"></audio>
+<audio id="arm-sound" src="arms.mp3"></audio>
+<audio id="leg-sound" src="legs.mp3"></audio>
+<audio id="eyes-sound" src="eyes.mp3"></audio>
+<audio id="Fingres-sound" src="fingers.mp3"></audio>
+<audio id="Stomach-sound" src="Stomach.mp3"></audio>
+
+<script>
+    // Wait until the page is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Select the headline
+  const headline = document.querySelector('.dance');
+
+  // Select the audio element
+  const headlineSound = document.getElementById('headline-sound');
+
+  // Add hover event to play the sound
+  headline.addEventListener('mouseenter', () => {
+    headlineSound.currentTime = 0;  // Reset sound to start
+    headlineSound.play();           // Play the sound
+  });
+});
+
+  document.querySelector('.main-head').addEventListener('mouseenter', () => {
+    document.getElementById('head-sound').currentTime = 0; // Restart sound
+    document.getElementById('head-sound').play();
+  });
+
+  document.querySelector('.left-arm').addEventListener('mouseenter', () => {
+    document.getElementById('arm-sound').currentTime = 0;
+    document.getElementById('arm-sound').play();
+  });
+
+  document.querySelector('.left-leg-sub').addEventListener('mouseenter', () => {
+    document.getElementById('leg-sound').currentTime = 0;
+    document.getElementById('leg-sound').play();
+  });
+
+  document.querySelector('.eyes').addEventListener('mouseenter', () => {
+    document.getElementById('eyes-sound').currentTime = 0; // Restart sound
+    document.getElementById('eyes-sound').play();
+  });
+
+  document.querySelector('.left-hand').addEventListener('mouseenter', () => {
+    document.getElementById('Fingres-sound').currentTime = 0; // Restart sound
+    document.getElementById('Fingres-sound').play();
+  });
+
+  document.querySelector('.chest').addEventListener('mouseenter', () => {
+    document.getElementById('Stomach-sound').currentTime = 0; // Restart sound
+    document.getElementById('Stomach-sound').play();
+  });
+
+
+  // Wait until the page is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const robot = document.getElementById('robot');  // Select the robot
+  let clickCount = 0;  // Initialize click counter
+
+  robot.addEventListener('click', () => {
+    clickCount++;  // Increase the click count each time the robot is clicked
+
+    if (clickCount >= 5) {  // After 5 clicks
+      robot.classList.add('fall');  // Add the 'fall' class to trigger the animation
+    }
+  });
+});
+
+
+robot.addEventListener('click', () => {
+  clickCount++;
+
+  if (clickCount >= 5) {
+    robot.classList.add('fall');
+  }
+
+  if (clickCount == 6) {  // On the 6th click, stand back up
+    robot.classList.remove('fall');
+    clickCount = 0;  // Reset click count
+  }
+});
+
+</script>
+
+
+</body>
+</html>
